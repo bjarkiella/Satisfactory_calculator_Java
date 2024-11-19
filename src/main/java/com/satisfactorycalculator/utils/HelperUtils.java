@@ -2,13 +2,15 @@
 
 package com.satisfactorycalculator.utils;
 
+import java.io.IOException;
 // Package imports
 import java.io.InputStream;
 import java.net.URL;
 
+
 public class HelperUtils {
-    // This method returns the open file of a 
-    public static InputStream open(String fileName) throws IllegalArgumentException {
+    // This method returns the open file of a stream
+    public static InputStream open(String fileName) throws IOException  {
         // The class loader returns a URL, therefore a URL object is required here
         URL resource = HelperUtils.class.getClassLoader().getResource(fileName);
         
@@ -20,3 +22,4 @@ public class HelperUtils {
         return HelperUtils.class.getClassLoader().getResourceAsStream(fileName);
     }
 }
+

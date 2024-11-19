@@ -6,7 +6,7 @@ package com.satisfactorycalculator.utils;
 
 public class Constants {
     // Name of the excel file
-    public static final String DATA_FILE = "item_list.xlxs";
+    public static final String DATA_FILE = "item_list.xlsx";
 
     // Data columns - Components
     public static final String DC_ITEM = "Item";
@@ -73,7 +73,7 @@ public class Constants {
     public static final String DS_BUILD = "buildings";
     public static final String DS_LOG = "logistics";
 
-    // Array of Data Sheets [PROPABLY DONT NEED THIS ONE]
+    // Array of Data Sheets 
     public static final String[] DS_SHEETS = { DS_RAW, DS_COMP, DS_POWER, DS_BUILD, DS_LOG };
 
 

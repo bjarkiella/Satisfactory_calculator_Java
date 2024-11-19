@@ -1,6 +1,11 @@
-main\java\com\satisfactorycalculator\models\Components.class
-main\java\com\satisfactorycalculator\models\Logistics.class
-main\java\com\satisfactorycalculator\models\Production.class
-main\java\com\satisfactorycalculator\models\Power.class
-main\java\com\satisfactorycalculator\models\Buildings.class
-main\java\com\satisfactorycalculator\utils\Constants.class
+com\satisfactorycalculator\models\Logistics.class
+com\satisfactorycalculator\models\Power.class
+com\satisfactorycalculator\models\Production.class
+com\satisfactorycalculator\models\Buildings.class
+com\satisfactorycalculator\utils\ExcelReader.class
+com\satisfactorycalculator\Main.class
+com\satisfactorycalculator\utils\SheetReader.class
+com\satisfactorycalculator\utils\HelperUtils.class
+com\satisfactorycalculator\models\Components.class
+com\satisfactorycalculator\utils\LineReader.class
+com\satisfactorycalculator\utils\Constants.class
