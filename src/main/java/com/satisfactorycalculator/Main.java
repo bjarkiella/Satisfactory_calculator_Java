@@ -11,6 +11,7 @@ import com.satisfactorycalculator.utils.Constants;
 import com.satisfactorycalculator.utils.ExcelReader;
 import com.satisfactorycalculator.utils.SheetReader;
 
+import com.satisfactorycalculator.models.*;
 
 // 
 
@@ -30,7 +31,7 @@ public class Main {
         
         // Declearing some variables
         Workbook workbook = null;
-        Sheet[] sheets = new Sheet[Constants.DS_SHEETS.length];
+        SheetReader[] sheets = new SheetReader[Constants.DS_SHEETS.length];
 
         // Loading the excel file
         try {
@@ -43,13 +44,24 @@ public class Main {
         
         // Loading the sheets in an array  
         for (int i=0;i<Constants.DS_SHEETS.length;i++){
-            sheets[i] = SheetReader.loadSheet(workbook, Constants.DS_SHEETS[i]);
+            sheets[i] = new SheetReader(workbook, Constants.DS_SHEETS[i]);
             System.out.println(Constants.DS_SHEETS[i] + " is being loaded");
         }
-    
+        
+        // Finding the component sheet
+        SheetReader compSheet = SheetReader.findSheet(sheets,Constants.DS_COMP);
+        Components reqItemObject = new Components(compSheet.getSheet(), req_item, req_item_type, Constants.DS_COMP);
+        reqItemObject.printRow();
+        // System.out.println(reqItemObject.getItemColumn());
+
+
+        }
+        //Components(Sheet sheet, String itemName, String itemType)
         // Searching for the requested item in the DS_COMP sheet
+
+        
         // Call the Compoent class here
         // Searching for the requested power gen in DS_POWER sheet
-    }
-
 }
+
+

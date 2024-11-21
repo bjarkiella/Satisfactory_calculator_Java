@@ -41,6 +41,8 @@ public class Constants {
     public static final String DC_CRAFTED_IN = "crafted_in";
     public static final String DC_ITEM_PER_MIN = "item_per_min";
 
+    // public static final String[] DC_COMP = {DC_ITEM,DC_ITEM_TYPE}
+
     // Data columns - Logistics
     public static final String DC_CAPACITY = "capacity";
     public static final String DC_CAPACITY_UNIT = "capacity_unit";
