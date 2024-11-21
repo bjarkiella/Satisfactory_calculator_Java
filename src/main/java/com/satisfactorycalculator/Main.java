@@ -2,6 +2,7 @@
 package com.satisfactorycalculator;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Workbook;  // Importing the Workbook object from apache
 import org.apache.poi.ss.usermodel.Sheet;
@@ -45,17 +46,39 @@ public class Main {
         // Loading the sheets in an array  
         for (int i=0;i<Constants.DS_SHEETS.length;i++){
             sheets[i] = new SheetReader(workbook, Constants.DS_SHEETS[i]);
-            System.out.println(Constants.DS_SHEETS[i] + " is being loaded");
+            //System.out.println(Constants.DS_SHEETS[i] + " is being loaded");
         }
         
         // Finding the component sheet
         SheetReader compSheet = SheetReader.findSheet(sheets,Constants.DS_COMP);
         Components reqItemObject = new Components(compSheet.getSheet(), req_item, req_item_type, Constants.DS_COMP);
-        reqItemObject.printRow();
+        // reqItemObject.printRow();
         // System.out.println(reqItemObject.getItemColumn());
 
+        // Printing out results
+        printResults(reqItemObject,req_qty, req_overclock, req_power,fuel_type,req_power_overclock);
 
+    
         }
+    public static void printResults(Components reqItemObject,float req_qty, float req_overclock, String req_power,String fuel_type,float req_power_overclock) {
+        // Full filtered row fetched
+        Map<String, String> itemMap = reqItemObject.getFullRow();
+
+        // Things print out
+        System.out.println("---------User input---------");
+        System.out.println("Requested item: " + itemMap.get(Constants.DC_ITEM));
+        System.out.println("Requested item type: " + itemMap.get(Constants.DC_ITEM_TYPE));
+        System.out.println("Requested qty: " + req_qty+" pcs");
+        System.out.println("Requested manufacturing overclock: " + req_overclock+"%");
+        System.out.println("Manufacturing facility: " + itemMap.get(Constants.DC_CRAFTED_IN));
+
+        System.out.println("---------Power input---------");
+        System.out.println("Requested power facility " + req_power);
+        System.out.println("Fuel type: " + fuel_type);
+        System.out.println("Requested power overclock: " + req_power_overclock+"%");
+
+        System.out.println("---------Results---------");
+    }
         //Components(Sheet sheet, String itemName, String itemType)
         // Searching for the requested item in the DS_COMP sheet
 
