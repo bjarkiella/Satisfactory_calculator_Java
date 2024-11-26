@@ -51,7 +51,12 @@ public class Main {
         
         // Finding the component sheet
         SheetReader compSheet = SheetReader.findSheet(sheets,Constants.DS_COMP);
-        Components reqItemObject = new Components(compSheet.getSheet(), req_item, req_item_type, Constants.DS_COMP);
+        Components reqItemObject = new Components(compSheet.getSheet(), req_item, req_item_type);
+        
+        // Finding the building sheet
+        SheetReader buildingSheet = SheetReader.findSheet(sheets, Constants.DS_BUILD);
+        Buildings reqBuildObject = new Buildings(buildingSheet.getSheet(), reqItemObject.getFacility().get(Constants.DC_CRAFTED_IN));
+        
         // reqItemObject.printRow();
         // System.out.println(reqItemObject.getItemColumn());
 

@@ -1,7 +1,5 @@
 // This class creates an object for components
 
-// Need to refer to some of the helper functions here when reading the lines
-
 package com.satisfactorycalculator.models;
 
 import org.apache.poi.ss.usermodel.*;
@@ -16,23 +14,16 @@ import java.util.Map;
 
 
 public class Components {
-    private String itemName;
-    private String itemType;
-    private List<String> itemTypeColumn;
-    private List<String> itemColumn;
-    Map<String, String> itemRow;
+    private Map<String, String> itemRow;
 
-    public Components(Sheet sheet, String itemName, String itemType, String sheetName) {
-        this.itemName = itemName;
-        this.itemType = itemType;
-        this.itemColumn = HelperUtils.getCellsInCol(sheet, Constants.DC_ITEM);  // This column is used to filter the Item
-        this.itemTypeColumn = HelperUtils.getCellsInCol(sheet, Constants.DC_ITEM_TYPE);  // This column is used to filter item_type
+    public Components(Sheet sheet, String itemName, String itemType) {
+        List<String> itemColumn = HelperUtils.getCellsInCol(sheet, Constants.DC_ITEM);  // This column is used to filter the Item
+        List<String> itemTypeColumn = HelperUtils.getCellsInCol(sheet, Constants.DC_ITEM_TYPE);  // This column is used to filter item_type
         
         // Use helperutils to find find the item and item type
-        List<Integer> itemFiltIndex = HelperUtils.filterCols(itemColumn, itemName);
-        List<Integer> itemTypeFiltIndex = HelperUtils.filterCols(itemTypeColumn, itemType);
+        List<Integer> itemFiltIndex = HelperUtils.filterColsName(itemColumn, itemName);
+        List<Integer> itemTypeFiltIndex = HelperUtils.filterColsName(itemTypeColumn, itemType);
         int filterIndex = HelperUtils.doubleIndexFilter(itemFiltIndex, itemTypeFiltIndex);
-        Map<String, String> itemRow = new HashMap<>();
         this.itemRow = HelperUtils.getRowAsMap(sheet, filterIndex);
     }
 
@@ -107,17 +98,6 @@ public class Components {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
     }
-    // private List<String> getItemColumn() {
-    //     // This method returns all the items in the item column
-    //     return itemColumn;
-    // }
-
-    // private List<String> getItemTypeColumn() {
-    //     // This method returns all the types in the item column
-    //     return itemTypeColumn;
-    // }
- 
-
 
 }
 

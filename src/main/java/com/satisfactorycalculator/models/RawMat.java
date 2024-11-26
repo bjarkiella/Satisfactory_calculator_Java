@@ -1,5 +1,4 @@
-// This class holds all information about the buildings
-
+// This class includes all the the finormation about the raw materials
 package com.satisfactorycalculator.models;
 
 import org.apache.poi.ss.usermodel.*;
@@ -13,14 +12,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Buildings {
+public class RawMat {
     private Map<String, String> itemRow;
     
-    public Buildings(Sheet sheet, String buildingName) {
+    public RawMat(Sheet sheet, String rawName) {
         List<String> itemColumn = HelperUtils.getCellsInCol(sheet, Constants.DC_ITEM);  // This column is used to filter the Item
         
         // Building tab filtered to find the building
-        List<Integer> itemFiltIndex = HelperUtils.filterColsName(itemColumn, buildingName);
+        List<Integer> itemFiltIndex = HelperUtils.filterColsName(itemColumn, rawName);
         this.itemRow = HelperUtils.getRowAsMap(sheet, itemFiltIndex.get(0));
     }
 
@@ -28,20 +27,39 @@ public class Buildings {
         // This method returns the item rows
         return itemRow;
     }
-
     //////////// GET METHODS ////////////
-    public Map<String,String> getBuilding() {
+    public Map<String,String> getGen() {
         Map<String,String> mapOut = new HashMap<>();
         mapOut.put(Constants.DC_ITEM,itemRow.get(Constants.DC_ITEM));
-        return mapOut;
-    }
-    public Map<String,String> getPower() {
-        Map<String,String> mapOut = new HashMap<>();
-        mapOut.put(Constants.DC_POWER_USE,itemRow.get(Constants.DC_POWER_USE));
-        mapOut.put(Constants.DC_POWER_UNIT,itemRow.get(Constants.DC_POWER_UNIT));
+        mapOut.put(Constants.DC_FUEL_TYPE,itemRow.get(Constants.DC_FUEL_TYPE));
         return mapOut;
     }
     
+    public Map<String,String> getQty() {
+        Map<String,String> mapOut = new HashMap<>();
+        mapOut.put(Constants.DC_ITEM_QTY,itemRow.get(Constants.DC_ITEM_QTY));
+        return mapOut;
+    }
+
+    public Map<String,String> getCraftTime() {
+        Map<String,String> mapOut = new HashMap<>();
+        mapOut.put(Constants.DC_CRAFT_TIME,itemRow.get(Constants.DC_CRAFT_TIME));
+        mapOut.put(Constants.DC_CRAFT_TIME_UNIT,itemRow.get(Constants.DC_CRAFT_TIME_UNIT));
+        return mapOut;
+    }
+
+    public Map<String,String> getFacility() {
+        Map<String,String> mapOut = new HashMap<>();
+        mapOut.put(Constants.DC_CRAFTED_IN,itemRow.get(Constants.DC_CRAFTED_IN));
+        return mapOut;
+    }
+
+    public Map<String,String> getNode() {
+        Map<String,String> mapOut = new HashMap<>();
+        mapOut.put(Constants.DC_RAW_NODE,itemRow.get(Constants.DC_RAW_NODE));
+        return mapOut;
+    }
+
     //////////// PRINT METHODS ////////////
     public void printRow() {
         // This method prints out the filtered row
