@@ -20,8 +20,8 @@ public class Power {
         List<String> itemTypeColumn = HelperUtils.getCellsInCol(sheet, Constants.DC_FUEL_TYPE);  // This column is used to filter item_type
         
         // Use helperutils to find find the item and item type
-        List<Integer> itemFiltIndex = HelperUtils.filterCols(itemColumn, genName);
-        List<Integer> itemTypeFiltIndex = HelperUtils.filterCols(itemTypeColumn, fuelType);
+        List<Integer> itemFiltIndex = HelperUtils.filterColsName(itemColumn, genName);
+        List<Integer> itemTypeFiltIndex = HelperUtils.filterColsName(itemTypeColumn, fuelType);
         int filterIndex = HelperUtils.doubleIndexFilter(itemFiltIndex, itemTypeFiltIndex);
         this.itemRow = HelperUtils.getRowAsMap(sheet, filterIndex);
     }

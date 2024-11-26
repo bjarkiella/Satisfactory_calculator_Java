@@ -20,7 +20,7 @@ public class Buildings {
         List<String> itemColumn = HelperUtils.getCellsInCol(sheet, Constants.DC_ITEM);  // This column is used to filter the Item
         
         // Building tab filtered to find the building
-        List<Integer> itemFiltIndex = HelperUtils.filterCols(itemColumn, buildingName);
+        List<Integer> itemFiltIndex = HelperUtils.filterColsName(itemColumn, buildingName);
         this.itemRow = HelperUtils.getRowAsMap(sheet, itemFiltIndex.get(0));
     }
 

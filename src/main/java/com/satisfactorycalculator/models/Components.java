@@ -21,8 +21,8 @@ public class Components {
         List<String> itemTypeColumn = HelperUtils.getCellsInCol(sheet, Constants.DC_ITEM_TYPE);  // This column is used to filter item_type
         
         // Use helperutils to find find the item and item type
-        List<Integer> itemFiltIndex = HelperUtils.filterCols(itemColumn, itemName);
-        List<Integer> itemTypeFiltIndex = HelperUtils.filterCols(itemTypeColumn, itemType);
+        List<Integer> itemFiltIndex = HelperUtils.filterColsName(itemColumn, itemName);
+        List<Integer> itemTypeFiltIndex = HelperUtils.filterColsName(itemTypeColumn, itemType);
         int filterIndex = HelperUtils.doubleIndexFilter(itemFiltIndex, itemTypeFiltIndex);
         this.itemRow = HelperUtils.getRowAsMap(sheet, filterIndex);
     }

@@ -81,7 +81,7 @@ public class HelperUtils {
         return finalInt;
     }
 
-    public static List<Integer> filterCols(List<String> columnValues, String filterName) {
+    public static List<Integer> filterColsName(List<String> columnValues, String filterName) {
         // This function finds all indexes of an instances of a filterName
         List<Integer> filterLine = new ArrayList<>();
         for (int i = 0; i < columnValues.size(); i++) {
@@ -91,6 +91,42 @@ public class HelperUtils {
         }
         return filterLine;
     }
+
+    public static Integer filterColsNumber(List<String> columnValues, float filterNumber ) {
+        // This method finds an index of the closes filterNumber in the columnValues list (kinda)
+        int filterLine = 0;
+        
+        // Changing the columnValues to a float
+        float [] floatColumns = stringToFloats(columnValues);
+        // Arrays.sort(floatColumns);  // Do I need to do this? If I do, then I need to keep track of all the values in the data, instead I just assume the columns are sorted in the data set (as it is). Or I could subtract all the values from the wanted value and select the smallest positve or negative one
+
+
+        int numBelts = 1;
+        int maxBelts = 5;
+        while (numBelts < maxBelts) {
+            float adjustedCap = filterNumber * numBelts;
+            for (int i = 0; i < floatColumns.length; i++) {
+                if (floatColumns[i] >= adjustedCap) {
+                    return i;
+                }
+            }
+        }
+        return filterLine;
+    }
+
+    public static float[] stringToFloats(List<String> stringList) {
+        // This method conversts a string list to a float list
+        float[] floatList = new float[stringList.size()];
+        for (int i = 0; i < stringList.size(); i++) {
+            try {
+                floatList[i] = Float.parseFloat(stringList.get(i));
+            } catch (NumberFormatException e) {
+                floatList[i] = 0;
+            }
+
+        }
+        return floatList;
+    } 
 
     public static List<String> getHeader(Sheet sheet) {
         // Determine the first row of a sheet, that is the column names

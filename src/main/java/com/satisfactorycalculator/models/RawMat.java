@@ -19,7 +19,7 @@ public class RawMat {
         List<String> itemColumn = HelperUtils.getCellsInCol(sheet, Constants.DC_ITEM);  // This column is used to filter the Item
         
         // Building tab filtered to find the building
-        List<Integer> itemFiltIndex = HelperUtils.filterCols(itemColumn, rawName);
+        List<Integer> itemFiltIndex = HelperUtils.filterColsName(itemColumn, rawName);
         this.itemRow = HelperUtils.getRowAsMap(sheet, itemFiltIndex.get(0));
     }
 
