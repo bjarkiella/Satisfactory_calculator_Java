@@ -6,6 +6,7 @@ import org.apache.poi.ss.usermodel.*;
 
 import com.satisfactorycalculator.utils.Constants;
 import com.satisfactorycalculator.utils.HelperUtils;
+import com.satisfactorycalculator.utils.MathHelper;
 
 import java.util.List;
 
@@ -32,22 +33,22 @@ public class Components {
         return itemRow;
     }
 
-    //////////// GET METHODS ////////////
-    public Map<String,String> getItem() {
+    //////////// MAP METHODS ////////////
+    public Map<String,String> getItemMap() {
         Map<String,String> mapOut = new HashMap<>();
         mapOut.put(Constants.DC_ITEM,itemRow.get(Constants.DC_ITEM));
         mapOut.put(Constants.DC_ITEM_TYPE,itemRow.get(Constants.DC_ITEM_TYPE));
         return mapOut;
     }
 
-    public Map<String,String> getQty() {
+    public Map<String,String> getQtyMap() {
         Map<String,String> mapOut = new HashMap<>();
         mapOut.put(Constants.DC_ITEM_QTY,itemRow.get(Constants.DC_ITEM_QTY));
         mapOut.put(Constants.DC_ITEM_QTY_UNIT,itemRow.get(Constants.DC_ITEM_QTY_UNIT));
         return mapOut;
     }
 
-    public Map<String,String> getExtraOutput() {
+    public Map<String,String> getExtraOutputMap() {
         // Change this one to check first if Extra items are present, if not throw error or a message or something
         Map<String,String> mapOut = new HashMap<>();
         String extraCheck = itemRow.get(Constants.DC_EXTRA_ITEM);
@@ -59,14 +60,14 @@ public class Components {
         return mapOut;
     }
 
-    public Map<String,String> getCraftTime() {
+    public Map<String,String> getCraftTimeMap() {
         Map<String,String> mapOut = new HashMap<>();
         mapOut.put(Constants.DC_CRAFT_TIME,itemRow.get(Constants.DC_CRAFT_TIME));
         mapOut.put(Constants.DC_CRAFT_TIME_UNIT,itemRow.get(Constants.DC_CRAFT_TIME_UNIT));
         return mapOut;
     }
 
-    public Map<String,String> getInput() {
+    public Map<String,String> getInputMap() {
         // Only return the ones that are not empty
         Map<String,String> mapOut = new HashMap<>();
         String[] inputMatStrings = {Constants.DC_INPUT_MAT_1,Constants.DC_INPUT_MAT_2,Constants.DC_INPUT_MAT_3,Constants.DC_INPUT_MAT_4};
@@ -88,6 +89,19 @@ public class Components {
         Map<String,String> mapOut = new HashMap<>();
         mapOut.put(Constants.DC_CRAFTED_IN,itemRow.get(Constants.DC_CRAFTED_IN));
         return mapOut;
+    }
+
+    //////////// GET METHODS ////////////
+    public float getItemPerMin() {
+        // This method returns the item per minute of an item
+        float itemQty = Float.parseFloat(getQtyMap().get(Constants.DC_ITEM_QTY));
+        float craftTime = Float.parseFloat(getCraftTimeMap().get(Constants.DC_CRAFT_TIME));
+        return MathHelper.itemPerMin(itemQty, craftTime);
+    }
+
+    public String getFacilityName() {
+        // This method returns the crafting faciltiy as a String
+        return getFacility().get(Constants.DC_CRAFTED_IN);
     }
 
     //////////// PRINT METHODS ////////////
