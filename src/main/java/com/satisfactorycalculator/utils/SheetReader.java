@@ -19,7 +19,7 @@ public class SheetReader {
     public static SheetReader findSheet(SheetReader[] sheets, String sheetName) {
         // Returns a sheet with a given name
         for (SheetReader sheet : sheets) {
-            if (sheet.getName().equals(Constants.DS_COMP)) {
+            if (sheet.getName().equals(sheetName)) {
                 return sheet;
             }
         }

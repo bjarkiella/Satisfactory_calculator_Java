@@ -29,19 +29,26 @@ public class Buildings {
         return itemRow;
     }
 
-    //////////// GET METHODS ////////////
-    public Map<String,String> getBuilding() {
+    //////////// MAP METHODS ////////////
+    public Map<String,String> getBuildingMap() {
         Map<String,String> mapOut = new HashMap<>();
         mapOut.put(Constants.DC_ITEM,itemRow.get(Constants.DC_ITEM));
         return mapOut;
     }
-    public Map<String,String> getPower() {
+    public Map<String,String> getPowerMap() {
         Map<String,String> mapOut = new HashMap<>();
         mapOut.put(Constants.DC_POWER_USE,itemRow.get(Constants.DC_POWER_USE));
         mapOut.put(Constants.DC_POWER_UNIT,itemRow.get(Constants.DC_POWER_UNIT));
         return mapOut;
     }
     
+    //////////// GET METHODS ////////////
+    public float getPower() {
+        // This method returns the power use of the building
+        float powerOut = Float.parseFloat(getPowerMap().get(Constants.DC_POWER_USE));
+        return powerOut;
+    }
+
     //////////// PRINT METHODS ////////////
     public void printRow() {
         // This method prints out the filtered row

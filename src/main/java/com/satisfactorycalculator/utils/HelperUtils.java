@@ -194,5 +194,15 @@ public class HelperUtils {
 
     }
 
+    public static void printSheet(Sheet sheet) {
+        for (Row row : sheet) {
+            for (Cell cell : row) {
+                System.out.println(getCellValueAsString(cell) + "\t");
+            }
+            System.out.println();
+        }
+
+    }
+
 }
 

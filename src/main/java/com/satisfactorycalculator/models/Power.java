@@ -31,22 +31,22 @@ public class Power {
         return itemRow;
     }
 
-    //////////// GET METHODS ////////////
-    public Map<String,String> getGen() {
+    //////////// MAP METHODS ////////////
+    public Map<String,String> getGenMap() {
         Map<String,String> mapOut = new HashMap<>();
         mapOut.put(Constants.DC_ITEM,itemRow.get(Constants.DC_ITEM));
         mapOut.put(Constants.DC_FUEL_TYPE,itemRow.get(Constants.DC_FUEL_TYPE));
         return mapOut;
     }
 
-    public Map<String,String> getPowerGen() {
+    public Map<String,String> getPowerGenMap() {
         Map<String,String> mapOut = new HashMap<>();
         mapOut.put(Constants.DC_POWER_GEN,itemRow.get(Constants.DC_POWER_GEN));
         mapOut.put(Constants.DC_POWER_GEN_UNIT,itemRow.get(Constants.DC_POWER_GEN_UNIT));
         return mapOut;
     }
 
-    public Map<String,String> getInput() {
+    public Map<String,String> getInputMap() {
         // Only return the ones that are not empty
         Map<String,String> mapOut = new HashMap<>();
         String[] inputMatStrings = {Constants.DC_INPUT_MAT_1,Constants.DC_INPUT_MAT_2};
@@ -63,6 +63,15 @@ public class Power {
         }
         return mapOut;
     }
+
+
+    //////////// GET METHODS ////////////
+    public float getPowerGen() {
+        // This method returns the power generation of a generator
+        float varOut = Float.parseFloat(getPowerGenMap().get(Constants.DC_POWER_GEN));  // converting value to float
+        return varOut;
+    }
+
 
     //////////// PRINT METHODS ////////////
 

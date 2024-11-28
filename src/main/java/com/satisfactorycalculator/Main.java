@@ -10,7 +10,9 @@ import org.apache.poi.ss.usermodel.Sheet;
 // Importing other classes
 import com.satisfactorycalculator.utils.Constants;
 import com.satisfactorycalculator.utils.ExcelReader;
+import com.satisfactorycalculator.utils.HelperUtils;
 import com.satisfactorycalculator.utils.SheetReader;
+import com.satisfactorycalculator.utils.MathHelper;
 
 import com.satisfactorycalculator.models.*;
 
@@ -46,7 +48,6 @@ public class Main {
         // Loading the sheets in an array  
         for (int i=0;i<Constants.DS_SHEETS.length;i++){
             sheets[i] = new SheetReader(workbook, Constants.DS_SHEETS[i]);
-            //System.out.println(Constants.DS_SHEETS[i] + " is being loaded");
         }
         
         // Finding the component sheet
@@ -55,17 +56,30 @@ public class Main {
         
         // Finding the building sheet
         SheetReader buildingSheet = SheetReader.findSheet(sheets, Constants.DS_BUILD);
-        Buildings reqBuildObject = new Buildings(buildingSheet.getSheet(), reqItemObject.getFacility().get(Constants.DC_CRAFTED_IN));
+        //HelperUtils.printSheet(buildingSheet.getSheet());
+        Buildings reqBuildObject = new Buildings(buildingSheet.getSheet(), reqItemObject.getFacilityName());
+        
+        // Finding power sheet
+        SheetReader powerSheet = SheetReader.findSheet(sheets, Constants.DS_POWER);
+        Power reqPowerObject = new Power(powerSheet.getSheet(), req_power, fuel_type);
+
+        // Requirement calculations done
+        int reqMachines = MathHelper.noMachines(reqItemObject.getItemPerMin(),req_qty);
+        float reqPower = MathHelper.amountPower(reqBuildObject.getPower(), reqMachines);
+        int reqPowerGen = MathHelper.powerGen(reqPower, reqPowerObject.getPowerGen());
         
         // reqItemObject.printRow();
         // System.out.println(reqItemObject.getItemColumn());
 
         // Printing out results
-        printResults(reqItemObject,req_qty, req_overclock, req_power,fuel_type,req_power_overclock);
+        printResults(reqItemObject,req_qty, req_overclock, req_power,fuel_type,req_power_overclock, reqMachines,reqPower,reqPowerGen);
 
     
         }
-    public static void printResults(Components reqItemObject,float req_qty, float req_overclock, String req_power,String fuel_type,float req_power_overclock) {
+
+
+
+    public static void printResults(Components reqItemObject,float req_qty, float req_overclock, String req_power,String fuel_type,float req_power_overclock, int reqMachines, float reqPower, int reqPowerGen) {
         // Full filtered row fetched
         Map<String, String> itemMap = reqItemObject.getFullRow();
 
@@ -83,6 +97,9 @@ public class Main {
         System.out.println("Requested power overclock: " + req_power_overclock+"%");
 
         System.out.println("---------Results---------");
+        System.out.println("Required " + reqItemObject.getFacilityName() + ": " + reqMachines);
+        System.out.println("Required amount of power: " + reqPower + " MW");
+        System.out.println("Required amount of " + req_power + ": " + reqPowerGen);
     }
         //Components(Sheet sheet, String itemName, String itemType)
         // Searching for the requested item in the DS_COMP sheet
